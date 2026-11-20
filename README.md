@@ -2,32 +2,30 @@
 
 Web del viaje: https://pedrogarrido.github.io/mexico-2027/
 
-## Estado
+## Estado (20 de noviembre de 2026)
 
 - Frontend publicado con GitHub Pages.
-- Soporte de **Supabase preparado** (lectura pública, edición por correo autorizado, almacenamiento persistente, control de revisiones y refresco cada 30 segundos).
-- **Aún no está conectado a ninguna base de datos**: `config.js` tiene URL y clave vacías. Hasta completar la configuración funciona en modo local y las ediciones **no se comparten**.
-- El contenido del viaje sigue precargado en `index.html`. No se ha modificado ni borrado.
-- El esquema de seguridad está en `supabase/schema.sql`.
+- **Supabase conectado** mediante la clave publicable desde `config.js`.
+- Tablas `trip_documents` y `trip_editors` creadas con RLS. La auditoría de seguridad no detectó avisos en el momento de la configuración.
+- **Datos iniciales cargados en la base de datos** (18 planes, 11 actividades, 21 tareas, 8 personas, 7 referencias de reservas, 3 partidas de presupuesto y 5 notas).
+- Lectura pública activada; acceso anónimo sin escritura.
+- **Pendiente:** añadir correos autorizados a `trip_editors` y configurar el dominio de GitHub Pages en Authentication → URL Configuration para iniciar sesión por email.
+- Las modificaciones realizadas anteriormente en el navegador no se han importado: si existían, conservan su copia local y deben exportarse a JSON para migrarlas.
 
-## Activar Supabase
+## Activar la edición por correo
 
-1. Crea un proyecto en https://supabase.com/dashboard o conecta Supabase a ChatGPT para que configuremos juntos el proyecto.
-2. En el SQL Editor, ejecuta el contenido de `supabase/schema.sql` completo. No ejecutes instrucciones de permisos aisladas.
-3. En SQL Editor, autoriza a la primera persona que podrá editar: `insert into public.trip_editors(email) values (lower('CORREO-DEL-EDITOR')) on conflict do nothing;`. Se pueden añadir otros correos más tarde. **No subas estos correos a GitHub.**
-4. En **Authentication → URL Configuration**: Site URL `https://pedrogarrido.github.io/mexico-2027/` y añade esta misma URL a las redirecciones permitidas. Activa inicio de sesión por email con enlaces mágicos. Revisa límites de correo en el plan usado (puede requerir SMTP propio).
-5. En **Project Settings → API** copia la URL del proyecto y la **publishable/anon key**, nunca la `service_role` ni una secret key. Edita `config.js`:
-
-   ```javascript
-   window.MEXICO_SUPABASE = {
-     url: 'https://TU-PROYECTO.supabase.co',
-     publishableKey: 'sb_publishable_...'
-   };
+1. La base de datos y conexión pública ya están preparadas. **No hace falta volver a ejecutar `schema.sql` ni crear otro proyecto.**
+2. Elige el correo que quieres autorizar como editor. Agrégalo desde SQL Editor (o pídele a ChatGPT que lo haga con autorización):
+   ```sql
+   insert into public.trip_editors(email)
+   values (lower('CORREO-DEL-EDITOR'))
+   on conflict do nothing;
    ```
-
-6. Despliega los cambios en `main` (GitHub Pages lo publica automáticamente). Abre la web y entra en **Acceder para editar** con uno de los correos autorizados.
-7. Desde **Datos y copias de seguridad**, el primer editor deberá pulsar **Publicar el itinerario inicial en Supabase**. Solo ocurre una vez. Hasta entonces, los visitantes ven la copia inicial en modo de consulta.
-8. Confirma la edición desde dos navegadores diferentes: uno con acceso de editor y otro en modo consulta. La vista pública se refresca al abrir la web y, durante la sesión, cada 30 segundos.
+3. En **Supabase → Authentication → URL Configuration**, configura la Site URL a `https://pedrogarrido.github.io/mexico-2027/` e incluye `https://pedrogarrido.github.io/mexico-2027/**` en Redirect URLs permitidas.
+4. Comprueba que **Authentication → Providers → Email** está habilitado y permite enviar un enlace mágico de acceso. El servicio de correo predeterminado tiene límites; para uso intensivo puede hacer falta SMTP propio.
+5. Abre la web, pulsa **Acceder para editar** y confirma el enlace enviado al correo autorizado.
+6. La información inicial **ya está publicada** en `trip_documents`: no necesitas pulsar ningún botón de inicialización.
+7. Prueba un cambio desde una sesión autorizada y observa el resultado desde otra ventana. La consulta se refresca al cargar o cada 30 segundos.
 
 ## Antes de migrar los datos locales
 
