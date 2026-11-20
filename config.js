@@ -1,6 +1,7 @@
-// Este archivo se completará cuando conectemos el proyecto Supabase.
-// La URL y la clave publicable son aptas para el navegador; nunca pongas aquí service_role/secret keys.
+// Datos públicos necesarios para acceder a Supabase desde el navegador.
+// La autorización de edición se controla en PostgreSQL mediante RLS.
+// No almacenar claves secretas o service_role en este archivo.
 window.MEXICO_SUPABASE = {
-  url: '',
-  publishableKey: ''
+  url: 'https://glbkizwwydsqzswwdisz.supabase.co',
+  publishableKey: 'sb_publishable_avzhTHQZcaWHvLWYitqqAA_8dYUbpUG'
 };
