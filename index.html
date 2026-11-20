@@ -124,6 +124,9 @@ function clone(o){return JSON.parse(JSON.stringify(o))}
 function load(){try{const data=JSON.parse(localStorage.getItem(STORAGE_KEY));if(data && data.version===1 && Array.isArray(data.itinerary)&&Array.isArray(data.tasks))return data;}catch(e){}return clone(STARTER)}
 const cloud=window.MexicoCloud;let db=cloud.state.configured?clone(STARTER):load();let active='inicio';let filter={itineraryRegion:'Todas',itineraryGroup:'Todos los grupos',tasks:'Activos',taskCategory:'Todas',activity:'Todas',bookings:'Todos',notes:'Todas',search:''};
 const $=s=>document.querySelector(s);
+const emailAuthError=window.location.hash.startsWith('#error=')?new URLSearchParams(window.location.hash.slice(1)):null;
+let authNotice=emailAuthError?(emailAuthError.get('error_code')==='otp_expired'?'El enlace de acceso ya se ha utilizado o ha caducado. Solicita uno nuevo y utilízalo una sola vez.':(emailAuthError.get('error_description')||'No se ha podido iniciar sesión. Solicita otro enlace.')):'';
+if(emailAuthError)history.replaceState(null,'',location.pathname+location.search+'#inicio');
 function saveLocal(){db.updated=new Date().toISOString().slice(0,10);try{localStorage.setItem(STORAGE_KEY,JSON.stringify(db))}catch(e){toast('No se ha podido guardar. Exporta una copia de seguridad.');}}
 function canEdit(){return !cloud.state.configured || (cloud.state.ready && cloud.state.docExists && cloud.state.editor && !cloud.state.busy && !cloud.state.error)}
 async function commitMutation(mutate,message='Cambios guardados'){if(!canEdit()){toast('Necesitas permiso para editar los datos compartidos.');return false;}const next=clone(db);mutate(next);next.updated=new Date().toISOString().slice(0,10);if(!cloud.state.configured){db=next;saveLocal();render();toast(message);return true}try{await cloud.save(next);db=clone(next);render();toast(message);return true}catch(err){try{await cloud.loadRemote()}catch(_){}db=clone(cloud.state.data||STARTER);render();alert('No se pudo guardar: '+cloud.explain(err));return false}}
@@ -169,7 +172,7 @@ if(info)info.textContent=c.configured?(c.error?'Sin conexión':!c.ready?'Cargand
 if(c.configured&&!c.ready){$('#page').innerHTML='<div class="panel panel-body">Cargando datos del viaje…</div>';return;}
 const banner=c.configured?(c.error?'<div class="cloud-alert">⚠️ No se ha podido leer la base de datos: '+e(c.error)+'. Se muestra una copia inicial sin posibilidad de editar.</div>':!c.docExists?'<div class="cloud-alert">☁️ El proyecto de Supabase está conectado, pero todavía no tiene datos publicados. Un editor autorizado puede inicializarlo desde «Datos y copias».</div>':(!c.editor?'<div class="cloud-alert">👀 Estás consultando el planning compartido. Para modificarlo, inicia sesión con un correo autorizado.</div>':'')):'';
 const views={inicio:showInicio,itinerario:showItinerario,actividades:showActividades,presupuesto:showPresupuesto,reservas:showReservas,pendientes:showPendientes,personas:showPersonas,notas:showNotas,ajustes:showAjustes};
-$('#page').innerHTML=banner+(views[active]||showInicio)()+ '<div class="app-note">EXPEDICIÓN MÉXICO 2027 · Última edición: '+e(db.updated||'sin registrar')+' · '+(c.configured?(c.docExists?'Supabase · Versión '+e(c.revision):'Sin publicar'):'Guardado solo en este navegador')+'</div>';
+$('#page').innerHTML=(authNotice?'<div class="cloud-alert">⚠️ '+e(authNotice)+' <button class="btn btn-outline btn-small" data-action="login">Solicitar otro enlace</button></div>':'')+banner+(views[active]||showInicio)()+ '<div class="app-note">EXPEDICIÓN MÉXICO 2027 · Última edición: '+e(db.updated||'sin registrar')+' · '+(c.configured?(c.docExists?'Supabase · Versión '+e(c.revision):'Sin publicar'):'Guardado solo en este navegador')+'</div>';
 if(c.configured&&!canEdit())document.querySelectorAll('[data-action="quick-task"],[data-action="pin"],[data-action="edit"],[data-action="delete"]').forEach(el=>{el.disabled=true;el.setAttribute('aria-disabled','true');});
 }
 const FIELDS={
@@ -236,6 +239,7 @@ $('#importFile').addEventListener('change',ev=>importFile(ev.target.files[0]));
 document.addEventListener('keydown',ev=>{if(ev.key==='Escape')closeModal();if((ev.ctrlKey||ev.metaKey)&&ev.key.toLowerCase()==='k'){ev.preventDefault();searchModal();}});
 document.addEventListener('click',ev=>{if(ev.target?.id==='editorBackdrop')closeModal();});
 cloud.onChange(state=>{
+ if(state.user)authNotice='';
  if(state.configured&&state.ready){db=clone(state.data||STARTER);}
  if(!document.getElementById('editForm')&&!document.getElementById('loginForm'))render();
 });
