@@ -1,0 +1,209 @@
+/* México '27 — Papel Picado Fiesta · tema visual.
+   Cambios exclusivamente de presentación: no altera datos, autenticación ni RLS. */
+:root{
+  --forest:#b10b66;
+  --forest-dark:#820449;
+  --ink:#25132e;
+  --muted:#806e7c;
+  --paper:#fff9f5;
+  --line:#f0e3e7;
+  --lime:#dfff97;
+  --coral:#ff7f00;
+  --blue:#00b8b0;
+  --white:#fff;
+  --shadow:0 7px 26px rgba(94,25,84,.075);
+  --fiesta-pink:#e5007d;
+  --fiesta-pink-deep:#8f0758;
+  --fiesta-turquoise:#00b8b0;
+  --fiesta-orange:#ff7f00;
+  --fiesta-purple:#7b1fa2;
+  --fiesta-green:#84cc16;
+  --fiesta-cream:#fff8f0;
+}
+body{background:var(--paper);color:var(--ink)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #00b8b0;outline-offset:3px}
+::selection{background:#ffd3e8;color:#690443}
+.sidebar{
+ background:linear-gradient(172deg,#760449 0%,#97055b 54%,#b20a68 100%);
+ color:#fff3fa;
+ padding-top:45px;
+ border-right:1px solid #c21875;
+ isolation:isolate;
+ overflow-y:auto;
+ scrollbar-width:thin;
+ scrollbar-color:#e45aa6 #850052;
+}
+.fiesta-sidebar-top{
+ position:absolute;z-index:0;left:0;top:0;right:0;height:34px;
+ background:linear-gradient(90deg,#fa0c8d,#ff30a2 50%,#fa0c8d);
+ color:#810042;text-align:center;font-size:22px;letter-spacing:10px;line-height:23px;
+ white-space:nowrap;overflow:hidden;
+ clip-path:polygon(0 0,100% 0,100% 70%,95% 92%,90% 72%,85% 92%,80% 72%,75% 92%,70% 72%,65% 92%,60% 72%,55% 92%,50% 72%,45% 92%,40% 72%,35% 92%,30% 72%,25% 92%,20% 72%,15% 92%,10% 72%,5% 92%,0 70%);
+}
+.brand,.nav,.nav-label,.sidebar-bottom{position:relative;z-index:2}
+.brand{padding-bottom:28px}
+.brand-logo{background:transparent;color:#ffc332;font-size:32px;width:37px;height:37px;filter:drop-shadow(0 2px 4px #63003944)}
+.brand-name{font-weight:850;letter-spacing:-.8px}
+.brand-name small{color:#ffd9ec;letter-spacing:1.15px}
+.nav-label{color:#ffc5e0;letter-spacing:1.4px}
+.nav-item{color:#fff1f8;border-radius:12px;font-weight:650}
+.nav-item:hover{background:#d82382;color:#fff}
+.nav-item.active{color:#fff;background:linear-gradient(90deg,#dc2f8d,#c9227b);box-shadow:0 4px 16px #45002a44}
+.nav-item .nicon{color:#fff;font-size:18px}
+.nav-item .nav-count{background:#00b8b0;color:#fff;font-weight:850}
+.nav-item.active .nav-count{background:#00b8b0;color:#fff}
+.fiesta-sidebar-art{position:relative;z-index:0;margin-top:auto;margin-bottom:-13px;min-height:154px;pointer-events:none;flex:0 0 154px;overflow:hidden}
+.fiesta-sidebar-art svg{width:100%;height:100%;display:block;object-fit:cover}
+.sidebar-bottom{margin-top:0}
+.side-travel{background:linear-gradient(130deg,#b51473,#a30063);border:1px solid #ed5ba4;box-shadow:0 5px 17px #59033333}
+.side-travel .micro{color:#ffd1e7}.side-travel b{color:#fff5a8}.side-travel span{color:#ffdaef}.sidebar-footer{color:#fac6de}
+.topbar{background:rgba(255,250,248,.95);border-bottom-color:#f3e3e9}
+.crumb{color:#8b5979}.crumb b{color:#5b1749}
+.searchbox{background:#fff;border-color:#ecdce5;color:#80677c}
+.searchbox:hover{border-color:#df8ab4}
+.content{max-width:1490px}
+.eyebrow{color:#bd2a7c}
+.page-head h1{color:#49124f}
+.page-head p{color:#847181}
+.btn-primary{background:var(--fiesta-pink);color:white;border-color:var(--fiesta-pink)}
+.btn-primary:hover{background:#c90072}
+.btn-outline{border-color:#eddce7;color:#751253;background:#fff}
+.btn-outline:hover{background:#fff1f8;border-color:#e8a6ca}
+.btn-soft{background:#fce2ef;color:#9f0759}
+.btn-danger{background:#fff3f0;color:#a43841}
+.cloud-status{color:#9b1762;font-weight:800}
+.panel{border:1px solid #f0e0e7;box-shadow:var(--shadow)}
+.hero{
+ min-height:265px;
+ border-radius:22px;
+ isolation:isolate;
+ background-color:#0676be;
+ background-image:
+   linear-gradient(90deg,rgba(0,81,153,.99) 0%,rgba(0,92,175,.92) 31%,rgba(0,91,168,.61) 51%,rgba(0,61,120,.06) 76%),
+   url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/View_Of_Guanajuato_From_The_Street_%2816536560374%29.jpg/1280px-View_Of_Guanajuato_From_The_Street_%2816536560374%29.jpg");
+ background-position:center,center 46%;
+ background-size:cover;
+ box-shadow:0 12px 31px #05609a25;
+}
+.hero-text{z-index:3;padding:56px 37px 33px;max-width:710px}
+.hero-text .hero-kicker{color:#f6e7ff;letter-spacing:1.7px}
+.hero h2{font-size:39px;letter-spacing:-1.3px;text-shadow:0 2px 12px #124b6d70}
+.hero p{color:#f2faff;max-width:530px;text-shadow:0 1px 6px #10477760}
+.hero-chips span{background:#057eaa80;border:1px solid #a1edee77;color:#fff}
+.hero-art{display:none}
+.fiesta-bunting{position:absolute;z-index:4;top:-1px;left:23%;right:9%;display:flex;justify-content:center;gap:6px;height:53px;pointer-events:none}
+.fiesta-bunting::before{content:"";position:absolute;left:-10px;right:-10px;top:0;height:2px;background:#fff8;z-index:2}
+.fiesta-flag{flex:1;max-width:95px;height:51px;position:relative;display:grid;place-items:center;
+ clip-path:polygon(0 0,100% 0,100% 84%,94% 84%,88% 96%,82% 84%,75% 96%,69% 84%,62% 96%,56% 84%,50% 96%,44% 84%,37% 96%,31% 84%,24% 96%,18% 84%,11% 96%,5% 84%,0 84%);
+ box-shadow:inset 0 2px 0 #fff6
+}
+.fiesta-flag::after{content:"✿";font-size:27px;line-height:1;color:#1463a0b8;text-shadow:-20px -7px 0 #1463a09c,20px 10px 0 #1463a09c;transform:rotate(-7deg)}
+.fiesta-flag:nth-child(1){background:#fa0084}.fiesta-flag:nth-child(2){background:#00d0d2}.fiesta-flag:nth-child(3){background:#ff8310}.fiesta-flag:nth-child(4){background:#8c20d9}.fiesta-flag:nth-child(5){background:#93cf09}.fiesta-flag:nth-child(6){background:#00c5dc}
+.fiesta-splash{position:absolute;z-index:2;bottom:3px;left:0;width:145px;height:115px;pointer-events:none;overflow:hidden}
+.fiesta-splash svg{width:100%;height:100%}
+.hero-photo-credit{position:absolute;z-index:3;right:11px;bottom:6px;font-size:9px;color:#fff;background:#210f2e99;padding:3px 7px;border-radius:8px}
+.hero-photo-credit a{text-decoration:underline;text-underline-offset:2px}
+.stat-grid{gap:15px}
+.stat{
+ min-height:126px;
+ padding:18px 21px 24px;
+ border-radius:17px;
+ position:relative;
+ overflow:hidden;
+ border:1px solid var(--card-border);
+ background:var(--card-bg);
+ --card-accent:#00b8b0;--card-bg:#e9fcfc;--card-border:#c9f1ee
+}
+.stat:nth-child(2){--card-accent:#ff7f00;--card-bg:#fff0e2;--card-border:#ffdbb5}
+.stat:nth-child(3){--card-accent:#7b1fa2;--card-bg:#f2e6ff;--card-border:#e7d4fb}
+.stat:nth-child(4){--card-accent:#84cc16;--card-bg:#f0fad9;--card-border:#e0efbc}
+.stat::after{
+ content:"✿  ✿  ✿  ✿  ✿  ✿  ✿  ✿";white-space:nowrap;
+ position:absolute;bottom:0;left:0;right:0;height:19px;
+ text-align:center;letter-spacing:3px;font-size:12px;line-height:18px;
+ background:var(--card-accent);color:#fff;
+ overflow:hidden
+}
+.stat .s-label{color:#5b475b;font-weight:750}
+.stat .value{color:#291333}
+.stat .sub{color:#68566a}
+.stat .stat-symbol{font-size:26px;opacity:1}
+.section-title h2{color:#5b155d;font-weight:850}
+.route-stop{background:linear-gradient(140deg,#fff5ed,#faf0f6);border:1px solid #f8e8e5}
+.route-stop:nth-of-type(1) .stop-num{color:#8cc40a}
+.route-stop:nth-of-type(2) .stop-num{color:#00a5a1}
+.route-stop:nth-of-type(3) .stop-num{color:#f47b09}
+.route-stop:nth-of-type(4) .stop-num{color:#7b1fa2}
+.route-stop:nth-of-type(5) .stop-num{color:#cc146d}
+.route-stop .stop-num{color:#bc397f}
+.route-stop b{color:#4b204e}.route-stop small{color:#8e7187}
+.route-arrow{color:#db8db8}
+.mini-alert{border-left:3px solid #ffad1c;background:#fff8e7;color:#845322}
+.taskline,.simpleline{border-color:#f5eaf0}
+.taskline small,.simpleline small,.muted{color:#857287}
+.tick{accent-color:#80c715}
+.little-label{color:#98517f}
+.status.confirmado,.status.hecho,.status.pagado,.status.comprado{background:#e5f9d8;color:#3c7519}
+.status.pendiente,.status.previsto,.status.estimado{background:#f8eaf2;color:#885473}
+.status.en-revision,.status.propuesto,.status.en-curso{background:#fff0d9;color:#955000}
+.status.por-definir,.status.por-confirmar,.status.reservado{background:#e5f9fa;color:#006f80}
+.filterrow select,.filterrow input,.form-control{border-color:#ebdbe5;color:#563650}
+.count-pill{background:#fae4ef;color:#9a175c}
+.timeline:before{background:#e8c5db}
+.timeline-item:before{background:#e5007d;box-shadow:0 0 0 2px #f7aacb;border-color:#fff8f0}
+.timeline-card{border-color:#f0dfeb;box-shadow:var(--shadow)}
+.timeline-card .place-icon,.activity-emoji{background:#ffe3ef}
+.timeline-card .meta,.booking .smallhead span{color:#a44680}
+.timeline-card .note{color:#ad6724}
+.iconbtn:hover{background:#ffedf6}
+.activity-bottom{background:#fff6fb;border-color:#f7e7ef}
+.packages summary{color:#af0b69}
+.data-table th{background:#fff1f6;color:#985b7e}
+.data-table td{border-color:#f3e5ed}
+.data-table tr:hover td{background:#fff9fc}
+.callout{background:#fff2e4;border-color:#ffddba;color:#7c4b32}
+.person-av{background:#fce0ed;color:#a0005c}
+.note-cat{color:#ac1968}
+.tag{background:#f8e2ee;color:#9b2a6b}
+.form-field label{color:#8c3470}
+.modal-backdrop{background:#350724ab}
+.modal{border:2px solid #f7dce9}
+.modal-head{background:#fff5fa}
+.toast{background:#950b60}
+.settings-panel h3{color:#63184f}
+.tab.active{background:#d40877}
+.sidebar .fiesta-sidebar-art + .sidebar-bottom{flex-shrink:0}
+@media(max-width:1150px){
+ .hero{background-position:center,63% center}
+ .hero-text{max-width:650px}
+ .fiesta-bunting{left:28%;right:5%}
+}
+@media(max-width:850px){
+ .sidebar{width:244px}
+ .hero-text{padding-top:60px}
+ .hero{background-position:center,63% center}
+ .fiesta-bunting{left:32%;right:4%}
+ .fiesta-flag{height:43px}
+}
+@media(max-width:600px){
+ .hero{min-height:285px;background-image:linear-gradient(90deg,rgba(0,82,155,.97),rgba(0,82,155,.79)),url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/View_Of_Guanajuato_From_The_Street_%2816536560374%29.jpg/1280px-View_Of_Guanajuato_From_The_Street_%2816536560374%29.jpg")}
+ .hero-text{padding:61px 21px 26px}
+ .hero h2{font-size:30px}
+ .hero p{font-size:12px}
+ .fiesta-bunting{left:12%;right:5%;gap:3px;height:42px}
+ .fiesta-flag{height:40px}
+ .fiesta-flag::after{font-size:18px}
+ .fiesta-splash{display:none}
+ .stat{padding:13px 14px 24px;min-height:118px}
+ .stat .value{font-size:23px}
+ .stat .s-label{font-size:10px}
+ .hero-photo-credit{font-size:8px}
+ .nav-label{padding-top:4px}
+ .fiesta-sidebar-art{min-height:130px;flex-basis:130px}
+}
+@media(max-height:750px){.fiesta-sidebar-art{display:none}.sidebar-bottom{margin-top:auto}}
+@media print{
+ .fiesta-sidebar-top,.fiesta-sidebar-art,.fiesta-bunting,.fiesta-splash,.hero-photo-credit{display:none!important}
+ .hero{background-image:linear-gradient(90deg,#0676be,#06a5be)!important}
+ .stat{print-color-adjust:exact}
+}
