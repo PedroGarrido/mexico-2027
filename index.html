@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="theme-color" content="#12453d"/>
+<meta name="theme-color" content="#97055b"/>
 <title>México 2027 · Nuestro viaje</title>
 <style>
 :root{--forest:#12453d;--forest-dark:#09342e;--ink:#192c28;--muted:#73827d;--paper:#f6f7f3;--line:#e4e9e2;--lime:#daedaa;--coral:#e78063;--blue:#5e87b7;--white:#fff;--shadow:0 8px 30px rgba(18,69,61,.055);--r:17px}
@@ -18,6 +18,7 @@
 button:disabled,input:disabled{opacity:.55;cursor:not-allowed}
 @media(max-width:750px){.cloud-status{display:none}.top-actions .btn{font-size:11px;padding:8px}}
 </style>
+<link rel="stylesheet" href="./fiesta.css"/>
 <script src="./config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./cloud.js"></script>
@@ -25,10 +26,30 @@ button:disabled,input:disabled{opacity:.55;cursor:not-allowed}
 <body>
 <div class="app">
   <aside class="sidebar" id="sidebar">
+    <div class="fiesta-sidebar-top" aria-hidden="true">✿ ❀ ✿ ❀ ✿ ❀ ✿</div>
     <button class="menu-close" aria-label="Cerrar menú" data-action="menu">×</button>
-    <a href="#inicio" class="brand" data-nav="inicio"><div class="brand-logo">✦</div><div class="brand-name">México '27<small>LA AVENTURA EMPIEZA AQUÍ</small></div></a>
+    <a href="#inicio" class="brand" data-nav="inicio"><div class="brand-logo">✿</div><div class="brand-name">México '27<small>LA AVENTURA EMPIEZA AQUÍ</small></div></a>
     <div class="nav-label">VUESTRO ESPACIO</div>
     <nav class="nav" id="sidebarNav"></nav>
+    <div class="fiesta-sidebar-art" aria-hidden="true"><svg viewBox="0 0 244 154" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 115Q39 90 78 120T170 108T244 122V154H0Z" fill="#ff9217"/>
+<path d="M0 130Q53 100 103 136T244 118V154H0Z" fill="#e95c66"/>
+<path d="M119 129V66H161V129" fill="#ffbf35"/>
+<path d="M113 76Q140 28 168 76Z" fill="#ffbf35"/>
+<path d="M137 55V24" stroke="#ffe26f" stroke-width="3"/>
+<path d="M130 29H144" stroke="#ffe26f" stroke-width="3"/>
+<path d="M130 130V103Q140 89 149 103V130Z" fill="#7b145b"/>
+<rect x="114" y="85" width="9" height="11" rx="4" fill="#ae0c60"/>
+<rect x="155" y="85" width="8" height="11" rx="4" fill="#ae0c60"/>
+<path d="M169 136V96H193V136" fill="#ffbb32"/>
+<path d="M166 103Q181 76 196 103Z" fill="#ffbb32"/>
+<rect x="175" y="115" width="10" height="21" rx="5" fill="#8b0d5c"/>
+<path d="M0 151Q63 129 108 154H0" fill="#00bdb5"/>
+<path d="M18 151Q25 111 16 82M18 130Q2 116 4 103M21 118Q37 111 37 96" stroke="#03cab8" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M50 151Q49 130 37 117M50 151Q60 126 77 111M50 151Q36 135 26 134M50 151Q67 138 84 140" stroke="#00a994" stroke-width="8" fill="none" stroke-linecap="round"/>
+<g transform="translate(32,75)"><circle r="11" fill="#ffaf00"/><g fill="#ff8000"><ellipse cy="-21" rx="10" ry="17"/><ellipse cy="21" rx="10" ry="17"/><ellipse cx="21" rx="17" ry="10"/><ellipse cx="-21" rx="17" ry="10"/><ellipse transform="rotate(45)" cy="-21" rx="10" ry="17"/><ellipse transform="rotate(-45)" cy="-21" rx="10" ry="17"/><ellipse transform="rotate(45)" cy="21" rx="10" ry="17"/><ellipse transform="rotate(-45)" cy="21" rx="10" ry="17"/></g><circle r="11" fill="#ffc329"/></g>
+<g transform="translate(220,46) scale(.75)"><circle r="10" fill="#ffe65c"/><g fill="#fa0590"><ellipse cy="-20" rx="9" ry="15"/><ellipse cy="20" rx="9" ry="15"/><ellipse cx="20" rx="15" ry="9"/><ellipse cx="-20" rx="15" ry="9"/><ellipse transform="rotate(45)" cy="-20" rx="9" ry="15"/><ellipse transform="rotate(-45)" cy="20" rx="9" ry="15"/><ellipse transform="rotate(-45)" cy="-20" rx="9" ry="15"/><ellipse transform="rotate(45)" cy="20" rx="9" ry="15"/></g><circle r="10" fill="#ffe65c"/></g>
+</svg></div>
     <div class="sidebar-bottom"><div class="side-travel"><div class="micro">PRÓXIMA AVENTURA</div><b id="countdownSide">—</b><span>hasta el encuentro en CDMX</span></div><div class="sidebar-footer">Hecho para vuestro viaje 🇲🇽</div></div>
   </aside>
   <div class="mobile-shade" id="mobileShade" data-action="menu"></div>
@@ -142,7 +163,7 @@ function sectionTitle(t,other=''){return `<div class="section-title"><h2>${t}</h
 function buttonAdd(type,label='Añadir'){if(!canEdit())return '';return `<button class="btn btn-primary" data-action="edit" data-type="${type}">＋ ${label}</button>`}
 function actions(type,id){if(!canEdit())return '';return `<button class="iconbtn" data-action="edit" data-type="${type}" data-id="${e(id)}" title="Editar" aria-label="Editar">✎</button>`}
 function showInicio(){const activeTasks=db.tasks.filter(t=>t.status!=='Hecho');const complete=db.tasks.length-activeTasks.length;const completedPercent=db.tasks.length?Math.round(100*complete/db.tasks.length):0;const groupBudget=db.budget.filter(b=>b.scope==='Grupo').reduce((sum,b)=>sum+b.quantity*b.unitPrice,0);const pBudget=db.budget.filter(b=>b.scope==='Pareja').reduce((sum,b)=>sum+b.quantity*b.unitPrice,0);const important=activeTasks.filter(t=>t.priority==='Alta').slice(0,5);const route=[['01','Monterrey','Antes del 20 feb.'],['02','CDMX','20–24 feb.'],['03','Mérida','25–26 feb.'],['04','Boda / Calakmul','26–28 feb.'],['05','Caribe','1–5 mar.']];return `
-<section class="hero"><div class="hero-text"><div class="hero-kicker">NUESTRO VIAJE · FEBRERO / MARZO 2027</div><h2>Nos vemos en México. <span style="color:#dcf0aa">¡Vámonos!</span></h2><p>Un único lugar para organizar el itinerario, tener los planes claros y no dejar ningún detalle atrás.</p><div class="hero-chips"><span>📍 Monterrey → Cancún</span><span>📅 20 feb — 5 mar</span><span>👥 Grupo de 6</span></div></div><svg class="hero-art" viewBox="0 0 390 248" aria-hidden="true"><circle cx="280" cy="75" r="54" fill="#dfeba7" opacity=".95"/><path d="M55 235 L158 88 L240 195 L310 126 L410 240Z" fill="#77a48b" opacity=".68"/><path d="M0 240 L110 165 L205 240Z" fill="#a1c5a5" opacity=".45"/><path d="M0 246Q95 195 205 229T390 209V248H0" fill="#2b6b55"/><path d="M320 221V142M320 186Q305 192 305 170V151M320 167Q337 170 337 146V130" stroke="#d6edae" stroke-width="11" fill="none" stroke-linecap="round"/><path d="M319 217V146M320 187Q306 190 306 170M319 165Q337 169 337 147" stroke="#b3d896" stroke-width="3" fill="none"/></svg></section>
+<section class="hero"><div class="fiesta-bunting" aria-hidden="true"><span class="fiesta-flag"></span><span class="fiesta-flag"></span><span class="fiesta-flag"></span><span class="fiesta-flag"></span><span class="fiesta-flag"></span><span class="fiesta-flag"></span></div><div class="hero-text"><div class="hero-kicker">NUESTRO VIAJE · FEBRERO / MARZO 2027</div><h2>Nos vemos en México. <span style="color:#ffe879">¡Vámonos!</span></h2><p>Un único lugar para organizar el itinerario, tener los planes claros y no dejar ningún detalle atrás.</p><div class="hero-chips"><span>📍 Monterrey → Cancún</span><span>📅 20 feb — 5 mar</span><span>👥 Grupo de 6</span></div></div><div class="fiesta-splash" aria-hidden="true"><svg viewBox="0 0 145 115" xmlns="http://www.w3.org/2000/svg"><g transform="translate(31,75)"><g fill="#f87c00"><ellipse ry="33" rx="13"/><ellipse ry="33" rx="13" transform="rotate(45)"/><ellipse ry="33" rx="13" transform="rotate(90)"/><ellipse ry="33" rx="13" transform="rotate(135)"/></g><circle r="14" fill="#ffbe2c"/><circle r="7" fill="#c56f0a"/></g><g transform="translate(105,100) scale(.72)"><g fill="#f89900"><ellipse ry="29" rx="13"/><ellipse ry="29" rx="13" transform="rotate(45)"/><ellipse ry="29" rx="13" transform="rotate(90)"/><ellipse ry="29" rx="13" transform="rotate(135)"/></g><circle r="13" fill="#ffdb47"/></g><path d="M0 111Q25 99 47 115H0" fill="#00bdba"/></svg></div><div class="hero-photo-credit">Foto: <a href="https://commons.wikimedia.org/wiki/File:View_Of_Guanajuato_From_The_Street_(16536560374).jpg" target="_blank" rel="noopener noreferrer">Bud Ellison</a> · <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a> · Guanajuato (recorte)</div></section>
 <div class="stat-grid"><div class="panel stat"><span class="stat-symbol">🗓️</span><div class="s-label">Tramo en grupo</div><div class="value">14 días</div><div class="sub">20 feb — 5 mar 2027</div></div><div class="panel stat"><span class="stat-symbol">👥</span><div class="s-label">Viajeros previstos</div><div class="value">6</div><div class="sub">+ contactos locales</div></div><div class="panel stat"><span class="stat-symbol">☑️</span><div class="s-label">Pendientes abiertos</div><div class="value">${activeTasks.length}</div><div class="sub">${completedPercent}% de tareas completadas</div></div><div class="panel stat"><span class="stat-symbol">🎈</span><div class="s-label">Actividades estudiadas</div><div class="value">3</div><div class="sub">Globo, Río Secreto y carnet</div></div></div>
 ${sectionTitle('Ruta general','<button class="btn btn-outline btn-small" data-nav="itinerario">Ver itinerario completo →</button>')}
 <div class="panel panel-body"><div class="route-list">${route.map((r,i)=>`${i?'<span class="route-arrow">›</span>':''}<div class="route-stop"><div class="stop-num">ETAPA ${r[0]}</div><b>${r[1]}</b><small>${r[2]}</small></div>`).join('')}</div><div class="mini-alert" style="margin-top:15px"><b>⚠️ Punto clave:</b> el tramo entre el <b>26 de febrero y el 5 de marzo</b> continúa en revisión. La salida temprana a Calakmul afecta a Uxmal y al reencuentro del grupo, y puede cambiar las noches en Holbox y el orden de Chichén Itzá.</div></div>
