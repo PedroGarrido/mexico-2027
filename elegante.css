@@ -1,0 +1,260 @@
+/* México '27 — Mexicano elegante
+   Capa de identidad sobre fiesta.css. Solo presentación: no modifica
+   navegación, autenticación, datos compartidos ni permisos de Supabase.
+
+   Paleta: crema 60%, burdeos 20%, rosa 10%, turquesa 6%, amarillo 4%.
+   Las superficies neutras dan protagonismo al contenido; los colores
+   vivos se reservan para acciones, indicadores y decoración mexicana. */
+:root {
+  --mx-cream: #FFF8F2;
+  --mx-surface: #FFFCFA;
+  --mx-burgundy: #65083F;
+  --mx-pink: #B91070;
+  --mx-pink-hover: #98105F;
+  --mx-turquoise: #009D98;
+  --mx-turquoise-dark: #007C78;
+  --mx-yellow: #F5B82E;
+  --mx-plum: #30172F;
+  --mx-muted: #695A68;
+  --mx-line: #EBDDE2;
+  --mx-soft-pink: #FBEAF2;
+
+  /* Mantener compatibles los tokens usados por el CSS original. */
+  --forest: var(--mx-pink);
+  --forest-dark: var(--mx-burgundy);
+  --ink: var(--mx-plum);
+  --muted: var(--mx-muted);
+  --paper: var(--mx-cream);
+  --line: var(--mx-line);
+  --lime: var(--mx-yellow);
+  --coral: var(--mx-yellow);
+  --blue: var(--mx-turquoise);
+  --white: #FFFFFF;
+  --shadow: 0 8px 26px rgba(69, 15, 51, .065);
+  --fiesta-pink: var(--mx-pink);
+  --fiesta-pink-deep: var(--mx-burgundy);
+  --fiesta-turquoise: var(--mx-turquoise);
+  --fiesta-orange: var(--mx-yellow);
+  --fiesta-purple: var(--mx-burgundy);
+  --fiesta-green: var(--mx-turquoise);
+  --fiesta-cream: var(--mx-cream);
+}
+body { background: var(--mx-cream); color: var(--mx-plum); }
+button:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--mx-turquoise);
+  outline-offset: 3px;
+}
+::selection { background: #F8D5E6; color: var(--mx-burgundy); }
+
+/* Navegación: profunda, cálida y reconociblemente mexicana. */
+.sidebar {
+  background: linear-gradient(174deg, #570735 0%, #760949 54%, #A01564 100%);
+  color: #FFFFFF;
+  border-right-color: #872052;
+  scrollbar-color: #C85A92 #65083F;
+}
+.fiesta-sidebar-top {
+  background: linear-gradient(90deg, #C31473, #DC2887 50%, #C31473);
+  color: #65083F;
+}
+.brand-logo { color: var(--mx-yellow); filter: drop-shadow(0 2px 4px #36052255); }
+.brand-name small { color: #FFE4F0; }
+.nav-label { color: #F1BBD6; }
+.nav-item { color: #FFF0F7; }
+.nav-item:hover { background: #8F185C; color: #FFFFFF; }
+.nav-item.active {
+  background: var(--mx-pink);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px #33051F40;
+}
+.nav-item .nav-count, .nav-item.active .nav-count {
+  background: var(--mx-turquoise-dark);
+  color: #FFFFFF;
+}
+.side-travel {
+  background: linear-gradient(130deg, #8D1059, #75104C);
+  border-color: #BB528C;
+  box-shadow: 0 5px 17px #3D082B33;
+}
+.side-travel .micro { color: #FFE0EC; }
+.side-travel b { color: #FFE69C; }
+.side-travel span, .sidebar-footer { color: #F8D4E5; }
+
+/* Tipografía, barra superior y controles. */
+.topbar { background: rgba(255, 250, 247, .96); border-bottom-color: var(--mx-line); }
+.crumb { color: #825D73; }
+.crumb b { color: var(--mx-burgundy); }
+.searchbox { background: #FFFFFF; border-color: var(--mx-line); color: #6E596B; }
+.searchbox:hover { border-color: #C985AB; }
+.eyebrow, .little-label { color: #963E70; }
+.page-head h1, .section-title h2, .settings-panel h3,
+.taskgroup-title { color: var(--mx-burgundy); }
+.page-head p, .muted { color: var(--mx-muted); }
+.btn-primary { background: var(--mx-pink); border-color: var(--mx-pink); color: #FFFFFF; }
+.btn-primary:hover { background: var(--mx-pink-hover); border-color: var(--mx-pink-hover); }
+.btn-outline { background: #FFFFFF; border-color: #E9D4DF; color: var(--mx-burgundy); }
+.btn-outline:hover { background: #FFF0F6; border-color: #CE8CAE; }
+.btn-soft { background: var(--mx-soft-pink); color: #841350; }
+.btn-danger { background: #FFF0EE; color: #92333E; }
+.cloud-status { color: #91165B; }
+.cloud-alert { background: #FFF7E4; border-color: #E9D69F; color: #745021; }
+.panel { background: #FFFFFF; border-color: var(--mx-line); box-shadow: var(--shadow); }
+
+/* Hero: fotografía de Guanajuato con velo burdeos, nunca azul. */
+.hero {
+  background-color: var(--mx-burgundy);
+  background-image:
+    linear-gradient(90deg,
+      rgba(60, 8, 42, .99) 0%,
+      rgba(83, 11, 57, .96) 30%,
+      rgba(101, 8, 63, .70) 52%,
+      rgba(60, 8, 42, .08) 79%),
+    url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/View_Of_Guanajuato_From_The_Street_%2816536560374%29.jpg/1280px-View_Of_Guanajuato_From_The_Street_%2816536560374%29.jpg");
+  box-shadow: 0 12px 31px #65083F22;
+}
+.hero h2 { color: #FFFFFF; text-shadow: 0 2px 10px #2C082755; }
+.hero-text .hero-kicker { color: #FFE4ED; }
+.hero p { color: #FFF2F7; text-shadow: 0 1px 6px #25051C77; }
+.hero-chips span {
+  background: rgba(101, 8, 63, .48);
+  border: 1px solid #F4C3DB7A;
+  color: #FFFFFF;
+}
+.hero-photo-credit { background: #30172FBB; color: #FFFFFF; }
+
+/* Papel picado: sigue siendo festivo, pero ya no compite con las tarjetas. */
+.fiesta-flag::after {
+  color: #65083F9E;
+  text-shadow: -20px -7px 0 #65083F73, 20px 10px 0 #65083F73;
+}
+.fiesta-flag:nth-child(1) { background: #D21B7C; }
+.fiesta-flag:nth-child(2) { background: #17B4AF; }
+.fiesta-flag:nth-child(3) { background: #F5B82E; }
+.fiesta-flag:nth-child(4) { background: #994E8C; }
+.fiesta-flag:nth-child(5) { background: #D9C441; }
+.fiesta-flag:nth-child(6) { background: #72C4BF; }
+
+/* KPI: una superficie neutra por tarjeta; solo un filete de acento. */
+.stat,
+.stat:nth-child(2),
+.stat:nth-child(3),
+.stat:nth-child(4) {
+  --card-bg: var(--mx-surface);
+  --card-border: var(--mx-line);
+  background: var(--mx-surface);
+  border-color: var(--mx-line);
+  border-top: 4px solid var(--card-accent);
+  padding-top: 15px;
+  padding-bottom: 18px;
+  box-shadow: 0 4px 16px #65083F0B;
+}
+.stat { --card-accent: var(--mx-turquoise); }
+.stat:nth-child(2) { --card-accent: var(--mx-yellow); }
+.stat:nth-child(3) { --card-accent: var(--mx-pink); }
+.stat:nth-child(4) { --card-accent: var(--mx-burgundy); }
+.stat::after { content: none; display: none; }
+.stat .s-label { color: #594657; }
+.stat .value { color: var(--mx-plum); }
+.stat .sub { color: #6D5A69; }
+.stat .stat-symbol { opacity: .82; }
+
+/* Ruta, pendientes y detalles: calma visual y jerarquía clara. */
+.route-stop {
+  background: linear-gradient(145deg, #FFFAF7, #FCF4F6);
+  border-color: #F0E1E5;
+}
+.route-stop .stop-num,
+.route-stop:nth-of-type(1) .stop-num,
+.route-stop:nth-of-type(5) .stop-num { color: #A01462; }
+.route-stop:nth-of-type(2) .stop-num { color: var(--mx-turquoise-dark); }
+.route-stop:nth-of-type(3) .stop-num { color: #986100; }
+.route-stop:nth-of-type(4) .stop-num { color: var(--mx-burgundy); }
+.route-stop b { color: var(--mx-plum); }
+.route-stop small { color: #745E70; }
+.route-arrow { color: #C78AAA; }
+.mini-alert { background: #FFF7E5; border-left-color: var(--mx-yellow); color: #785020; }
+.taskline, .simpleline { border-color: #F1E7EB; }
+.taskline small, .simpleline small { color: #756573; }
+.tick { accent-color: var(--mx-turquoise-dark); }
+.count-pill { background: var(--mx-soft-pink); color: #881451; }
+
+/* Estados: reservamos el verde al éxito, amarillo a la revisión y
+   turquesa a la información. No dependen únicamente del color. */
+.status.confirmado, .status.hecho, .status.pagado, .status.comprado {
+  background: #E5F5E9; color: #246A3B;
+}
+.status.pendiente, .status.previsto, .status.estimado {
+  background: #F8EAF1; color: #7C315D;
+}
+.status.en-revision, .status.propuesto, .status.en-curso {
+  background: #FFF1D5; color: #855000;
+}
+.status.por-definir, .status.por-confirmar, .status.reservado {
+  background: #E2F5F3; color: #006D69;
+}
+
+/* Contenido compartido de itinerario, actividades, personas y presupuesto. */
+.timeline:before { background: #E9C9D9; }
+.timeline-item:before {
+  background: var(--mx-pink);
+  box-shadow: 0 0 0 2px #F0B1D1;
+  border-color: var(--mx-cream);
+}
+.timeline-card { border-color: var(--mx-line); box-shadow: var(--shadow); }
+.timeline-card .place-icon, .activity-emoji { background: #FBE7F0; }
+.timeline-card .meta, .booking .smallhead span { color: #8E3868; }
+.timeline-card p, .booking p, .activity .desc { color: #695A68; }
+.timeline-card .note { color: #85551F; }
+.iconbtn { color: #725468; }
+.iconbtn:hover { background: #FCECF4; }
+.activity-bottom { background: #FFFAFC; border-color: #F0E3E8; }
+.packages summary, .note-cat { color: #98145F; }
+.package-row, .note-bottom { border-color: #EFE3E8; }
+.package-row span, .person small, .budget-stat small,
+.price small, .notes-grid .note-card p { color: #6D5D6B; }
+.data-table th { background: #FFF3F7; color: #7F4565; }
+.data-table td { border-color: #F0E4E9; }
+.data-table .td-note { color: #746372; }
+.data-table tr:hover td { background: #FFFAFC; }
+.callout { background: #FFF4E8; border-color: #F1DBBA; color: #785030; }
+.person-av { background: #F8E2ED; color: #8A1455; }
+.note-cat, .form-field label { color: #8F2B62; }
+.tag { background: #F8E4EE; color: #86275B; }
+.form-control, .filterrow input, .filterrow select {
+  background: #FFFFFF; border-color: #E8D9E1; color: var(--mx-plum);
+}
+.form-control:focus, .filterrow input:focus, .filterrow select:focus {
+  border-color: var(--mx-turquoise);
+}
+.empty { background: #FFFFFF; border-color: #E7D7E0; color: var(--mx-muted); }
+.empty b, .facts-list b { color: var(--mx-burgundy); }
+.facts-list li { border-color: var(--mx-line); color: #665767; }
+.settings-panel p, .field-hint, .app-note { color: #736273; }
+.separator { border-color: var(--mx-line); }
+
+/* Modales, pestañas y feedback. */
+.modal-backdrop { background: #30172FB5; }
+.modal { border-color: #EEDAE4; box-shadow: 0 24px 80px #30172F3D; }
+.modal-head { background: #FFF8FB; }
+.tab { border-color: #E7D7DF; color: #734362; }
+.tab.active { background: var(--mx-pink); color: #FFFFFF; }
+.toast { background: var(--mx-burgundy); color: #FFFFFF; }
+
+/* El degradado del banner también debe ser accesible en móvil e impresión. */
+@media (max-width: 600px) {
+  .hero {
+    background-image:
+      linear-gradient(90deg, rgba(65, 8, 44, .97), rgba(101, 8, 63, .82)),
+      url("https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/View_Of_Guanajuato_From_The_Street_%2816536560374%29.jpg/1280px-View_Of_Guanajuato_From_The_Street_%2816536560374%29.jpg");
+  }
+  .stat, .stat:nth-child(2), .stat:nth-child(3), .stat:nth-child(4) {
+    padding: 12px 14px 15px;
+  }
+}
+@media print {
+  .hero {
+    background-image: linear-gradient(90deg, var(--mx-burgundy), #98105F) !important;
+  }
+  .stat, .panel { print-color-adjust: exact; }
+}
