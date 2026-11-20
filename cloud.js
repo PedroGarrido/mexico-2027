@@ -54,6 +54,7 @@
         if (allowedError) throw allowedError;
         state.editor = Boolean(allowed);
       }
+      state.error = '';
     } catch (error) {
       state.editor = false;
       state.error = explain(error);
