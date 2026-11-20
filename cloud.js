@@ -140,7 +140,8 @@
     const sb = requireClient();
     const { error } = await sb.auth.signInWithOtp({
       email: email.trim(),
-      options: { emailRedirectTo: window.location.origin + window.location.pathname }
+      // La redirección debe ser la web pública incluso si la petición se hace en local.
+      options: { emailRedirectTo: 'https://pedrogarrido.github.io/mexico-2027/' }
     });
     if (error) throw error;
   }
