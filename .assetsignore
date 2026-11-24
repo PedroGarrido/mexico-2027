@@ -1,0 +1,10 @@
+# Exclude development/configuration files from public static hosting.
+# Only the HTML, JS and CSS at the repository root are site assets.
+README.md
+wrangler.jsonc
+.assetsignore
+.nojekyll
+.git/
+.github/
+supabase/
+node_modules/
