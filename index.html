@@ -63,7 +63,7 @@ const STORAGE_KEY='mexico_2027_trip_planner_public_rev_2026_11_20';
 const NAV=[['inicio','◈','Inicio'],['itinerario','▦','Itinerario'],['actividades','◉','Actividades'],['presupuesto','€','Presupuesto'],['reservas','✈','Vuelos y reservas'],['pendientes','☑','Pendientes'],['personas','♧','Personas'],['notas','▤','Notas'],['ajustes','⚙','Datos y copias']];
 // Secciones conservadas en la aplicación y en Supabase, pero ocultas del menú.
 // Para volver a mostrarlas basta con retirar su ID de esta lista.
-const HIDDEN_NAV_IDS=new Set(['personas','notas','ajustes']);
+const HIDDEN_NAV_IDS=new Set(['personas','notas','ajustes','presupuesto']);
 const STARTER={version:1,updated:'2026-11-20',itinerary:[
 {id:'d0',date:'',dateLabel:'Antes del 20 feb.',title:'Monterrey · estancia previa',place:'Monterrey',region:'Monterrey',group:'Laura y Peri',status:'Por definir',description:'Estancia de aproximadamente una semana antes de reunirse con el grupo en Ciudad de México.',note:'Fechas exactas sin concretar; confirmar vuelos y actividades.'},
 {id:'d1',date:'2027-02-20',title:'Llegada a Ciudad de México',place:'Centro Histórico de CDMX',region:'CDMX',group:'Todos',status:'Previsto',description:'Free tour por el Zócalo, la Catedral y Bellas Artes.',note:'Depende de la hora de llegada del grupo.'},
