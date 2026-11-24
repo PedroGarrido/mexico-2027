@@ -19,6 +19,14 @@ button:disabled,input:disabled{opacity:.55;cursor:not-allowed}
 @media(max-width:750px){.cloud-status{display:none}.top-actions .btn{font-size:11px;padding:8px}}
 </style>
 <link rel="stylesheet" href="./fiesta.css"/>
+<style>
+/* Vista pública limpia: los controles de búsqueda y sesión se conservan,
+   pero solo se muestra el acceso a edición con ?editar=1. */
+.top-actions{display:none!important}
+body.edit-entry .top-actions{display:flex!important}
+body.edit-entry .top-actions .searchbox,
+body.edit-entry .top-actions .cloud-status{display:none!important}
+</style>
 <link rel="stylesheet" href="./elegante.css"/>
 <script src="./config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -60,6 +68,11 @@ button:disabled,input:disabled{opacity:.55;cursor:not-allowed}
 <script>
 'use strict';
 const STORAGE_KEY='mexico_2027_trip_planner_public_rev_2026_11_20';
+/* Acceso de edición voluntario, sin mostrar controles en la vista pública.
+   La autorización real sigue dependiendo de Supabase Auth y RLS. */
+if(new URLSearchParams(window.location.search).get('editar')==='1'){
+  document.body.classList.add('edit-entry');
+}
 const NAV=[['inicio','◈','Inicio'],['itinerario','▦','Itinerario'],['actividades','◉','Actividades'],['presupuesto','€','Presupuesto'],['reservas','✈','Vuelos y reservas'],['pendientes','☑','Pendientes'],['personas','♧','Personas'],['notas','▤','Notas'],['ajustes','⚙','Datos y copias']];
 // Secciones conservadas en la aplicación y en Supabase, pero ocultas del menú.
 // Para volver a mostrarlas basta con retirar su ID de esta lista.
