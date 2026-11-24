@@ -61,6 +61,9 @@ button:disabled,input:disabled{opacity:.55;cursor:not-allowed}
 'use strict';
 const STORAGE_KEY='mexico_2027_trip_planner_public_rev_2026_11_20';
 const NAV=[['inicio','◈','Inicio'],['itinerario','▦','Itinerario'],['actividades','◉','Actividades'],['presupuesto','€','Presupuesto'],['reservas','✈','Vuelos y reservas'],['pendientes','☑','Pendientes'],['personas','♧','Personas'],['notas','▤','Notas'],['ajustes','⚙','Datos y copias']];
+// Secciones conservadas en la aplicación y en Supabase, pero ocultas del menú.
+// Para volver a mostrarlas basta con retirar su ID de esta lista.
+const HIDDEN_NAV_IDS=new Set(['personas','notas','ajustes']);
 const STARTER={version:1,updated:'2026-11-20',itinerary:[
 {id:'d0',date:'',dateLabel:'Antes del 20 feb.',title:'Monterrey · estancia previa',place:'Monterrey',region:'Monterrey',group:'Laura y Peri',status:'Por definir',description:'Estancia de aproximadamente una semana antes de reunirse con el grupo en Ciudad de México.',note:'Fechas exactas sin concretar; confirmar vuelos y actividades.'},
 {id:'d1',date:'2027-02-20',title:'Llegada a Ciudad de México',place:'Centro Histórico de CDMX',region:'CDMX',group:'Todos',status:'Previsto',description:'Free tour por el Zócalo, la Catedral y Bellas Artes.',note:'Depende de la hora de llegada del grupo.'},
@@ -158,7 +161,7 @@ function dateFmt(s,{month='short',day='numeric',weekday}={}){if(!s)return 'Sin f
 function eur(n){return new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:2}).format(Number(n)||0)}
 function tag(text){return `<span class="status ${e(String(text).toLowerCase().replace(/\s+/g,'-'))}">${e(text)}</span>`}
 function navGo(next){if(!NAV.some(n=>n[0]===next))next='inicio';active=next;filter.search='';history.replaceState(null,'','#'+next);$('#sidebar').classList.remove('open');$('#mobileShade').classList.remove('show');render();window.scrollTo({top:0,behavior:'instant'});}
-function renderNav(){const pending=db.tasks.filter(t=>t.status!=='Hecho').length;$('#sidebarNav').innerHTML=NAV.map(([id,icon,title])=>`<button class="nav-item ${active===id?'active':''}" data-nav="${id}"><span class="nicon">${icon}</span><span>${title}</span>${id==='pendientes'?`<span class="nav-count">${pending}</span>`:''}</button>`).join('');$('#crumbSection').textContent=NAV.find(n=>n[0]===active)?.[2]||'Inicio';const days=Math.ceil((new Date('2027-02-20T00:00:00')-new Date())/86400000);$('#countdownSide').textContent=days>0?days+' días':days===0?'¡Hoy!':'En marcha';}
+function renderNav(){const pending=db.tasks.filter(t=>t.status!=='Hecho').length;$('#sidebarNav').innerHTML=NAV.filter(([id])=>!HIDDEN_NAV_IDS.has(id)).map(([id,icon,title])=>`<button class="nav-item ${active===id?'active':''}" data-nav="${id}"><span class="nicon">${icon}</span><span>${title}</span>${id==='pendientes'?`<span class="nav-count">${pending}</span>`:''}</button>`).join('');$('#crumbSection').textContent=NAV.find(n=>n[0]===active)?.[2]||'Inicio';const days=Math.ceil((new Date('2027-02-20T00:00:00')-new Date())/86400000);$('#countdownSide').textContent=days>0?days+' días':days===0?'¡Hoy!':'En marcha';}
 function pagehead(eyebrow,title,sub,button=''){return `<header class="page-head"><div><div class="eyebrow">${eyebrow}</div><h1>${title}</h1><p>${sub}</p></div>${button}</header>`}
 function sectionTitle(t,other=''){return `<div class="section-title"><h2>${t}</h2>${other}</div>`}
 function buttonAdd(type,label='Añadir'){if(!canEdit())return '';return `<button class="btn btn-primary" data-action="edit" data-type="${type}">＋ ${label}</button>`}
