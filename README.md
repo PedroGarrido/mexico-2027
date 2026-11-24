@@ -2,6 +2,20 @@
 
 Web del viaje: https://pedrogarrido.github.io/mexico-2027/
 
+## Diseño · Mexicano elegante
+
+La web conserva las flores y el papel picado de `fiesta.css`, y aplica encima la paleta **Mexicano elegante** mediante `elegante.css`, cargado al final en `index.html`. Así se puede ajustar o revertir el aspecto sin modificar lógica, datos ni Supabase.
+
+- Crema `#FFF8F2`: fondo general.
+- Burdeos `#65083F`: profundidad, navegación y velo del banner.
+- Rosa mexicano `#B91070`: botones y selección activa.
+- Turquesa `#009D98`: indicadores y foco accesible.
+- Amarillo cempasúchil `#F5B82E`: detalles festivos y énfasis.
+- Ciruela `#30172F`: texto principal.
+
+Los tokens centrales `--mx-*` se definen en `elegante.css`. Los KPI comparten fondos neutros con una línea de acento; el banner mantiene su fotografía original con un degradado burdeos también en móvil. La hoja incluye estilos de impresión.
+
+
 ## Estado (20 de noviembre de 2026)
 
 - Frontend publicado con GitHub Pages.
@@ -43,3 +57,17 @@ Si alguien ha editado la versión anterior, debe entrar en ella y exportar su **
 ## Actualizaciones desde ChatGPT
 
 Podemos seguir actualizando el código en GitHub. Una vez que se carguen datos reales en Supabase, **editar solo el HTML o el objeto STARTER no actualizará los datos ya existentes en PostgreSQL**. Para cambiar el planning común desde ChatGPT habrá que usar el conector autorizado de Supabase o acceder con un usuario editor y aplicar allí la modificación.
+
+## Preview de rama en Cloudflare Workers
+
+Cloudflare Workers Builds está conectado a este repositorio. La configuración de
+**Previews Base** debe tener activado `Builds for Preview branches`, con
+`exit 0` como build command y `npx wrangler preview` como preview command.
+El despliegue principal sigue vinculado a `main`; al subir cambios a otras ramas
+se construyen previews independientes sin publicar esos cambios en producción.
+
+La rama `design/mexicano-elegante` contiene la variante visual para revisar
+antes de fusionar la [PR #1](https://github.com/PedroGarrido/mexico-2027/pull/1).
+Las URLs de preview se consultan en **Cloudflare → Workers & Pages → mexico-2027 → Previews**.
+La URL de preview puede ser pública y la app usa las mismas credenciales
+públicas de Supabase que las otras copias; no introducir datos sensibles.
